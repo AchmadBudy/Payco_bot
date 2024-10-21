@@ -114,10 +114,22 @@ try:
 
     while success_count < amount:
         try:
-            driver.get("https://apisangkara.my.id/payco/api")
+            driver.get("https://id.payco.com/join.nhn?serviceProviderCode=PAY&inflowKey=www&userLocale=ko_KR&nextURL=https%3A%2F%2Fwww.payco.com%2FafterLogin.nhn")
             email = Email().create_account()
             password = CONFIG['password']
             print(Style.BRIGHT + "\nWaiting loading full page Payco")
+            # centang gak tau apaan itu
+            time.sleep(2)
+            driver.find_element(By.CSS_SELECTOR, '#checkboxAll').click()
+            time.sleep(1)
+            # click continue? gak tau bahasa korea
+            driver.find_element(By.CSS_SELECTOR, '#confirmButton').click()
+            time.sleep(1)
+            # click other method
+            driver.find_element(By.CSS_SELECTOR, '#selectOtherMethod').click()
+            # click tombol putih
+            driver.find_element(By.CSS_SELECTOR, '#popupCancelButton').click()
+            time.sleep(1)
             while True:
                 try:
                     email_input = driver.find_element(By.CSS_SELECTOR, '#emailId')
